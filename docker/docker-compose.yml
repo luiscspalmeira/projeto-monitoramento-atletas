@@ -1,0 +1,42 @@
+services:
+
+  postgres:
+
+    image: postgres:16
+
+    container_name: postgres
+
+    restart: always
+
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  rabbitmq:
+
+    image: rabbitmq:4-management
+
+    container_name: rabbitmq
+
+    restart: always
+
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  redis:
+
+    image: redis:8
+
+    container_name: redis
+
+    restart: always
+
+    ports:
+      - "6379:6379"

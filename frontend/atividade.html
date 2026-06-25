@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Atividade</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="card">
+
+            <h2>Registrar Atividade</h2>
+
+            <input id="atletaId" placeholder="ID do Atleta">
+
+            <select id="modalidade">
+
+                <option>CORRIDA</option>
+
+                <option>BICICLETA</option>
+
+                <option>NATACAO</option>
+
+            </select>
+
+            <input id="distancia" placeholder="Distância">
+
+            <input id="tempo" placeholder="Tempo">
+
+            <input type="date" id="data">
+
+            <button onclick="salvarAtividade()">
+
+                Salvar
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/atividade.js"></script>
+
+</body>
+
+</html>
