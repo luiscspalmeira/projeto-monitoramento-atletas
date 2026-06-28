@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.faculdade.activity.dto.ActivityRequest;
+import com.faculdade.activity.dto.ActivityResponse;
 import com.faculdade.activity.entity.Atividade;
 import com.faculdade.activity.service.AtividadeService;
 
@@ -21,10 +23,11 @@ public class AtividadeController {
     private AtividadeService service;
 
     @PostMapping
-    public Atividade salvar(
-            @RequestBody Atividade atividade) {
+    public ActivityResponse salvar(
+            @RequestBody ActivityRequest request) {
 
-        return service.salvar(atividade);
+        return service.salvar(request);
+
     }
 
     @GetMapping
