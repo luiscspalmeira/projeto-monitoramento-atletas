@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.faculdade.activity.dto.ActivityRequest;
 import com.faculdade.activity.dto.ActivityResponse;
-import com.faculdade.activity.entity.Atividade;
 import com.faculdade.activity.service.AtividadeService;
 
 @RestController
@@ -27,19 +26,19 @@ public class AtividadeController {
             @RequestBody ActivityRequest request) {
 
         return service.salvar(request);
-
     }
 
     @GetMapping
-    public List<Atividade> listar() {
+    public List<ActivityResponse> listar() {
 
         return service.listar();
     }
 
     @GetMapping("/atleta/{id}")
-    public List<Atividade> buscarPorAtleta(
+    public List<ActivityResponse> buscarPorAtleta(
             @PathVariable Long id) {
 
         return service.buscarPorAtleta(id);
     }
+
 }

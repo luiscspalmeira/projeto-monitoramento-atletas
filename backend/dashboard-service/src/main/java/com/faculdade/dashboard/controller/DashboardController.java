@@ -1,40 +1,49 @@
 package com.faculdade.dashboard.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.faculdade.dashboard.dto.DashboardDTO;
-import com.faculdade.dashboard.dto.ModalidadesDTO;
+import com.faculdade.dashboard.dto.DashboardMensalResponse;
+import com.faculdade.dashboard.dto.DashboardSemanalResponse;
+import com.faculdade.dashboard.dto.ModalidadeResponse;
 import com.faculdade.dashboard.service.DashboardService;
 
 @RestController
 @RequestMapping("/dashboard")
 public class DashboardController {
 
-    @Autowired
-    private DashboardService service;
+    private final DashboardService service;
+
+    public DashboardController(DashboardService service) {
+        this.service = service;
+    }
 
     @GetMapping("/semanal/{atletaId}")
-    public DashboardDTO semanal(
+    public DashboardSemanalResponse semanal(
             @PathVariable Long atletaId) {
 
         return service.resumoSemanal(atletaId);
+
     }
 
     @GetMapping("/mensal/{atletaId}")
-    public DashboardDTO mensal(
+    public DashboardMensalResponse mensal(
             @PathVariable Long atletaId) {
 
         return service.resumoMensal(atletaId);
+
     }
 
     @GetMapping("/modalidades/{atletaId}")
-    public ModalidadesDTO modalidades(
+    public List<ModalidadeResponse> modalidades(
             @PathVariable Long atletaId) {
 
         return service.resumoModalidades(atletaId);
+
     }
+
 }

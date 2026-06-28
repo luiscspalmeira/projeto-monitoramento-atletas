@@ -2,7 +2,7 @@ package com.faculdade.dashboard.dto;
 
 import java.time.LocalDate;
 
-public class AtividadeDTO {
+public class ActivityResponse {
 
     private Long id;
 
@@ -12,11 +12,11 @@ public class AtividadeDTO {
 
     private Double distancia;
 
-    private Integer duracaoMinutos;
+    private Integer tempo;
 
-    private LocalDate dataAtividade;
+    private LocalDate data;
 
-    public AtividadeDTO() {
+    public ActivityResponse() {
     }
 
     public Long getId() {
@@ -51,19 +51,20 @@ public class AtividadeDTO {
         this.distancia = distancia;
     }
 
-    public Integer getDuracaoMinutos() {
-        return duracaoMinutos;
+    public Integer getTempo() {
+        return tempo;
     }
 
-    public void setDuracaoMinutos(Integer duracaoMinutos) {
-        this.duracaoMinutos = duracaoMinutos;
+    public void setTempo(Integer tempo) {
+        this.tempo = tempo;
     }
 
-    public LocalDate getDataAtividade() {
-        return dataAtividade;
+    public LocalDate getData() {
+        return data;
     }
 
-    public void setDataAtividade(LocalDate dataAtividade) {
-        this.dataAtividade = dataAtividade;
+    public void setData(LocalDate data) {
+        this.data = data;
     }
+
 }

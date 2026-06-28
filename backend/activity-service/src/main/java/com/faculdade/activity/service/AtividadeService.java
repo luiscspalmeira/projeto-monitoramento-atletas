@@ -1,5 +1,6 @@
 package com.faculdade.activity.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,40 +22,54 @@ public class AtividadeService {
         Atividade atividade = new Atividade();
 
         atividade.setAtletaId(request.getAtletaId());
-
         atividade.setModalidade(request.getModalidade());
-
         atividade.setDistancia(request.getDistancia());
 
+        // Conversão DTO -> Entity
         atividade.setDuracaoMinutos(request.getTempo());
-
         atividade.setDataAtividade(request.getData());
 
         atividade = repository.save(atividade);
 
+        return converterParaResponse(atividade);
+    }
+
+    public List<ActivityResponse> listar() {
+
+        List<ActivityResponse> lista = new ArrayList<>();
+
+        for (Atividade atividade : repository.findAll()) {
+            lista.add(converterParaResponse(atividade));
+        }
+
+        return lista;
+    }
+
+    public List<ActivityResponse> buscarPorAtleta(Long atletaId) {
+
+        List<ActivityResponse> lista = new ArrayList<>();
+
+        for (Atividade atividade : repository.findByAtletaId(atletaId)) {
+            lista.add(converterParaResponse(atividade));
+        }
+
+        return lista;
+    }
+
+    private ActivityResponse converterParaResponse(Atividade atividade) {
+
         ActivityResponse response = new ActivityResponse();
 
         response.setId(atividade.getId());
-
         response.setAtletaId(atividade.getAtletaId());
-
         response.setModalidade(atividade.getModalidade());
-
         response.setDistancia(atividade.getDistancia());
 
+        // Conversão Entity -> DTO
         response.setTempo(atividade.getDuracaoMinutos());
-
         response.setData(atividade.getDataAtividade());
 
         return response;
-
     }
 
-    public List<Atividade> listar() {
-        return repository.findAll();
-    }
-
-    public List<Atividade> buscarPorAtleta(Long atletaId) {
-        return repository.findByAtletaId(atletaId);
-    }
 }

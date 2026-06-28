@@ -1,16 +1,16 @@
 package com.faculdade.dashboard.dto;
 
-public class DashboardDTO {
+public class DashboardMensalResponse {
 
     private Long atletaId;
+
+    private Integer quantidadeTreinos;
 
     private Double distanciaTotal;
 
     private Integer tempoTotal;
 
-    private Integer quantidadeAtividades;
-
-    public DashboardDTO() {
+    public DashboardMensalResponse() {
     }
 
     public Long getAtletaId() {
@@ -19,6 +19,14 @@ public class DashboardDTO {
 
     public void setAtletaId(Long atletaId) {
         this.atletaId = atletaId;
+    }
+
+    public Integer getQuantidadeTreinos() {
+        return quantidadeTreinos;
+    }
+
+    public void setQuantidadeTreinos(Integer quantidadeTreinos) {
+        this.quantidadeTreinos = quantidadeTreinos;
     }
 
     public Double getDistanciaTotal() {
@@ -37,11 +45,4 @@ public class DashboardDTO {
         this.tempoTotal = tempoTotal;
     }
 
-    public Integer getQuantidadeAtividades() {
-        return quantidadeAtividades;
-    }
-
-    public void setQuantidadeAtividades(Integer quantidadeAtividades) {
-        this.quantidadeAtividades = quantidadeAtividades;
-    }
 }

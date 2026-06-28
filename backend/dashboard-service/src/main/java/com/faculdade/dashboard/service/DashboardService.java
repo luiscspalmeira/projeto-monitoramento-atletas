@@ -1,137 +1,182 @@
 package com.faculdade.dashboard.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClient;
 
-import com.faculdade.dashboard.dto.AtividadeDTO;
-import com.faculdade.dashboard.dto.DashboardDTO;
-import com.faculdade.dashboard.dto.ModalidadesDTO;
+import com.faculdade.dashboard.client.ActivityClient;
+import com.faculdade.dashboard.dto.ActivityResponse;
+import com.faculdade.dashboard.dto.DashboardMensalResponse;
+import com.faculdade.dashboard.dto.DashboardSemanalResponse;
+import com.faculdade.dashboard.dto.ModalidadeResponse;
 
 @Service
 public class DashboardService {
 
-    private final RestClient restClient =
-            RestClient.create("http://localhost:8081");
+    private final ActivityClient activityClient;
 
-    private List<AtividadeDTO> buscarAtividades(Long atletaId) {
-
-        return restClient.get()
-                .uri("/activities/atleta/" + atletaId)
-                .retrieve()
-                .body(new ParameterizedTypeReference<>() {});
+    public DashboardService(ActivityClient activityClient) {
+        this.activityClient = activityClient;
     }
 
-    public DashboardDTO resumoSemanal(Long atletaId) {
+    private List<ActivityResponse> buscarAtividades(Long atletaId) {
 
-        List<AtividadeDTO> atividades =
-                buscarAtividades(atletaId);
+        return activityClient.buscarPorAtleta(atletaId);
+
+    }
+
+    /*
+     * ===========================
+     * DASHBOARD SEMANAL
+     * ===========================
+     */
+
+    public DashboardSemanalResponse resumoSemanal(Long atletaId) {
+
+        List<ActivityResponse> atividades = buscarAtividades(atletaId);
 
         LocalDate hoje = LocalDate.now();
+
         LocalDate inicioSemana = hoje.minusDays(7);
 
-        DashboardDTO dto = new DashboardDTO();
+        DashboardSemanalResponse response = new DashboardSemanalResponse();
 
-        double distancia = 0;
-        int tempo = 0;
+        response.setAtletaId(atletaId);
+
         int quantidade = 0;
 
-        for (AtividadeDTO atividade : atividades) {
+        double distancia = 0;
 
-            if (!atividade.getDataAtividade()
-                    .isBefore(inicioSemana)) {
+        int tempo = 0;
 
-                distancia += atividade.getDistancia();
-                tempo += atividade.getDuracaoMinutos();
+        for (ActivityResponse atividade : atividades) {
+
+            if (atividade.getData() == null)
+                continue;
+
+            if (!atividade.getData().isBefore(inicioSemana)) {
+
                 quantidade++;
+
+                if (atividade.getDistancia() != null)
+                    distancia += atividade.getDistancia();
+
+                if (atividade.getTempo() != null)
+                    tempo += atividade.getTempo();
+
             }
+
         }
 
-        dto.setAtletaId(atletaId);
-        dto.setDistanciaTotal(distancia);
-        dto.setTempoTotal(tempo);
-        dto.setQuantidadeAtividades(quantidade);
+        response.setQuantidadeTreinos(quantidade);
+        response.setDistanciaTotal(distancia);
+        response.setTempoTotal(tempo);
 
-        return dto;
+        return response;
+
     }
 
-    public DashboardDTO resumoMensal(Long atletaId) {
+    /*
+     * ===========================
+     * DASHBOARD MENSAL
+     * ===========================
+     */
 
-        List<AtividadeDTO> atividades =
-                buscarAtividades(atletaId);
+    public DashboardMensalResponse resumoMensal(Long atletaId) {
+
+        List<ActivityResponse> atividades = buscarAtividades(atletaId);
 
         LocalDate hoje = LocalDate.now();
+
         LocalDate inicioMes = hoje.minusDays(30);
 
-        DashboardDTO dto = new DashboardDTO();
+        DashboardMensalResponse response = new DashboardMensalResponse();
+
+        response.setAtletaId(atletaId);
+
+        int quantidade = 0;
 
         double distancia = 0;
+
         int tempo = 0;
-        int quantidade = 0;
 
-        for (AtividadeDTO atividade : atividades) {
+        for (ActivityResponse atividade : atividades) {
 
-            if (!atividade.getDataAtividade()
-                    .isBefore(inicioMes)) {
+            if (atividade.getData() == null)
+                continue;
 
-                distancia += atividade.getDistancia();
-                tempo += atividade.getDuracaoMinutos();
+            if (!atividade.getData().isBefore(inicioMes)) {
+
                 quantidade++;
+
+                if (atividade.getDistancia() != null)
+                    distancia += atividade.getDistancia();
+
+                if (atividade.getTempo() != null)
+                    tempo += atividade.getTempo();
+
             }
+
         }
 
-        dto.setAtletaId(atletaId);
-        dto.setDistanciaTotal(distancia);
-        dto.setTempoTotal(tempo);
-        dto.setQuantidadeAtividades(quantidade);
+        response.setQuantidadeTreinos(quantidade);
+        response.setDistanciaTotal(distancia);
+        response.setTempoTotal(tempo);
 
-        return dto;
+        return response;
+
     }
 
-    public ModalidadesDTO resumoModalidades(Long atletaId) {
+    /*
+     * ===========================
+     * MODALIDADES
+     * ===========================
+     */
 
-        List<AtividadeDTO> atividades =
-                buscarAtividades(atletaId);
+    public List<ModalidadeResponse> resumoModalidades(Long atletaId) {
 
-        ModalidadesDTO dto = new ModalidadesDTO();
+        List<ActivityResponse> atividades = buscarAtividades(atletaId);
 
-        double corrida = 0;
-        double bicicleta = 0;
-        double natacao = 0;
+        int corrida = 0;
+        int bicicleta = 0;
+        int natacao = 0;
 
-        int tempoTotal = 0;
-        int quantidade = 0;
+        for (ActivityResponse atividade : atividades) {
 
-        for (AtividadeDTO atividade : atividades) {
+            if (atividade.getModalidade() == null)
+                continue;
 
-            String modalidade =
-                    atividade.getModalidade();
+            switch (atividade.getModalidade().toUpperCase()) {
 
-            if ("CORRIDA".equalsIgnoreCase(modalidade)) {
-                corrida += atividade.getDistancia();
+                case "CORRIDA":
+                    corrida++;
+                    break;
+
+                case "BICICLETA":
+                    bicicleta++;
+                    break;
+
+                case "NATACAO":
+                    natacao++;
+                    break;
+
+                case "NATAÇÃO":
+                    natacao++;
+                    break;
             }
 
-            if ("BICICLETA".equalsIgnoreCase(modalidade)) {
-                bicicleta += atividade.getDistancia();
-            }
-
-            if ("NATACAO".equalsIgnoreCase(modalidade)) {
-                natacao += atividade.getDistancia();
-            }
-
-            tempoTotal += atividade.getDuracaoMinutos();
-            quantidade++;
         }
 
-        dto.setCorrida(corrida);
-        dto.setBicicleta(bicicleta);
-        dto.setNatacao(natacao);
-        dto.setTempoTotal(tempoTotal);
-        dto.setQuantidadeAtividades(quantidade);
+        List<ModalidadeResponse> lista = new ArrayList<>();
 
-        return dto;
+        lista.add(new ModalidadeResponse("CORRIDA", corrida));
+        lista.add(new ModalidadeResponse("BICICLETA", bicicleta));
+        lista.add(new ModalidadeResponse("NATACAO", natacao));
+
+        return lista;
+
     }
+
 }
