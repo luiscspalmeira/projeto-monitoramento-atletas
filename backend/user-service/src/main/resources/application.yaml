@@ -3,21 +3,24 @@ server:
 
 spring:
 
+  application:
+    name: activity-service
+
   datasource:
-    url: jdbc:postgresql://localhost:5432/user_db
+    url: jdbc:postgresql://localhost:5432/activity_db
     username: admin
     password: admin
-    driver-class-name: org.postgresql.Driver
 
-  jpa:
-    hibernate:
-      ddl-auto: update
+services:
 
-    show-sql: true
+  user:
+    url: http://localhost:8081
 
-    properties:
-      hibernate:
-        format_sql: true
+  activity:
+    url: http://localhost:8082
 
-  application:
-    name: user-service
+  dashboard:
+    url: http://localhost:8083
+
+  gateway:
+    url: http://localhost:8080

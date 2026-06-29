@@ -2,22 +2,9 @@ server:
   port: 8083
 
 spring:
-
   application:
     name: dashboard-service
 
-  datasource:
-    url: jdbc:postgresql://localhost:5432/dashboard_db
-    username: admin
-    password: admin
-    driver-class-name: org.postgresql.Driver
-
-  jpa:
-    hibernate:
-      ddl-auto: update
-
-    show-sql: true
-
-    properties:
-      hibernate:
-        format_sql: true
+activity:
+  service:
+    url: http://localhost:8082

@@ -2,6 +2,17 @@ server:
   port: 8080
 
 spring:
-
   application:
     name: api-gateway
+
+user:
+  service:
+    url: http://localhost:8081
+
+activity:
+  service:
+    url: http://localhost:8082
+
+dashboard:
+  service:
+    url: http://localhost:8083
