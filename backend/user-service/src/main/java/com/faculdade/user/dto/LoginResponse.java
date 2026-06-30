@@ -1,6 +1,6 @@
 package com.faculdade.user.dto;
 
-public class UserResponse {
+public class LoginResponse {
 
     private Long id;
 
@@ -12,7 +12,7 @@ public class UserResponse {
 
     private boolean pcd;
 
-    public UserResponse() {
+    public LoginResponse() {
     }
 
     public Long getId() {

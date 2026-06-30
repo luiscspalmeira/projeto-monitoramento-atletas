@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Dashboard do Atleta</h1>
+
+    <h3 id="usuarioLogado"></h3>
+
+    <hr>
+
+    <div class="cards">
+
+        <div class="card">
+
+            <h2>Resumo Semanal</h2>
+
+            <p id="resumoSemanal">
+                Carregando...
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h2>Resumo Mensal</h2>
+
+            <p id="resumoMensal">
+                Carregando...
+            </p>
+
+        </div>
+
+    </div>
+
+    <hr>
+
+    <div class="cards">
+
+        <div class="card">
+
+            <h2>Modalidades</h2>
+
+            <canvas id="graficoPizza"></canvas>
+
+        </div>
+
+        <div class="card">
+
+            <h2>Distância</h2>
+
+            <canvas id="graficoBarras"></canvas>
+
+        </div>
+
+    </div>
+
+    <br>
+
+    <button
+            onclick="window.location='atividade.html'">
+
+        Nova Atividade
+
+    </button>
+
+    <button
+            onclick="logout()">
+
+        Sair
+
+    </button>
+
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/dashboard.js"></script>
+
+</body>
+
+</html>
