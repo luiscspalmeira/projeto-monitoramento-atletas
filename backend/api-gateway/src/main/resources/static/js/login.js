@@ -10,9 +10,6 @@ async function entrar() {
     const senha =
         document.getElementById("senha").value.trim();
 
-    const tipo =
-        document.getElementById("tipo").value;
-
     if (email === "" || senha === "") {
 
         alert("Preencha todos os campos.");
@@ -33,47 +30,30 @@ async function entrar() {
 
         );
 
-        localStorage.setItem(
+        // Dados da sessão
+        localStorage.setItem("usuarioId", usuario.id);
 
-            "atletaId",
+        // Compatibilidade com páginas antigas
+        localStorage.setItem("atletaId", usuario.id);
 
-            usuario.id
+        localStorage.setItem("usuarioNome", usuario.nome);
 
-        );
+        localStorage.setItem("usuarioEmail", usuario.email);
 
-        localStorage.setItem(
+        localStorage.setItem("usuarioPerfil", usuario.perfil);
 
-            "usuarioNome",
+        localStorage.setItem("usuarioPcd", usuario.pcd);
 
-            usuario.nome
+        // Redirecionamento conforme o perfil
+        if (usuario.perfil === "INSTRUTOR") {
 
-        );
+            window.location.href = "painel-instrutor.html";
 
-        localStorage.setItem(
+        } else {
 
-            "usuarioEmail",
+            window.location.href = "dashboard.html";
 
-            usuario.email
-
-        );
-
-        localStorage.setItem(
-
-            "usuarioPerfil",
-
-            usuario.perfil
-
-        );
-
-        localStorage.setItem(
-
-            "usuarioPcd",
-
-            usuario.pcd
-
-        );
-
-        window.location.href = "dashboard.html";
+        }
 
     }
     catch (erro) {

@@ -5,7 +5,8 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>Painel do Instrutor</title>
 
@@ -15,69 +16,138 @@
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <div class="card">
+    <div class="card">
 
-            <h2>Painel do Instrutor</h2>
+        <h2>Painel do Instrutor</h2>
 
-            <p>
+        <p>
+            Selecione um atleta para visualizar seu histórico e indicadores.
+        </p>
 
-                Selecione um atleta para acompanhar suas atividades.
+        <h3>Atletas Vinculados</h3>
 
-            </p>
+        <table id="tabelaAtletas">
 
-            <table id="tabelaAtletas">
+            <thead>
 
-                <thead>
+                <tr>
 
-                    <tr>
+                    <th>ID</th>
 
-                        <th>ID</th>
+                    <th>Nome</th>
 
-                        <th>Nome</th>
+                    <th>E-mail</th>
 
-                        <th>E-mail</th>
+                    <th>PcD</th>
 
-                        <th>PcD</th>
+                    <th>Ações</th>
 
-                        <th>Ações</th>
+                </tr>
 
-                    </tr>
+            </thead>
 
-                </thead>
+            <tbody id="tblAtletas">
 
-                <tbody>
+            </tbody>
 
-                </tbody>
+        </table>
 
-            </table>
+        <hr>
 
-            <br>
+        <h3>Indicadores do Atleta</h3>
 
-            <button onclick="window.location='dashboard.html'">
+        <table>
 
-                Dashboard
+            <tr>
 
-            </button>
+                <td><strong>Total de Treinos</strong></td>
 
-            <button onclick="window.location='atividade.html'">
+                <td id="totalTreinos">0</td>
 
-                Registrar Atividade
+            </tr>
 
-            </button>
+            <tr>
 
-            <button onclick="sair()">
-                Sair
-            </button>
+                <td><strong>Distância Total</strong></td>
 
-        </div>
+                <td id="totalDistancia">0 km</td>
+
+            </tr>
+
+            <tr>
+
+                <td><strong>Tempo Total</strong></td>
+
+                <td id="totalTempo">0 min</td>
+
+            </tr>
+
+            <tr>
+
+                <td><strong>Modalidade Mais Praticada</strong></td>
+
+                <td id="modalidadeFavorita">-</td>
+
+            </tr>
+
+        </table>
+
+        <hr>
+
+        <h3>Histórico de Atividades</h3>
+
+        <table id="tabelaHistorico">
+
+            <thead>
+
+                <tr>
+
+                    <th>Data</th>
+
+                    <th>Modalidade</th>
+
+                    <th>Distância (km)</th>
+
+                    <th>Tempo (min)</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="tblHistorico">
+
+            </tbody>
+
+        </table>
+
+        <br>
+
+        <button onclick="window.location='dashboard.html'">
+
+            Dashboard
+
+        </button>
+
+        <button onclick="window.location='atividade.html'">
+
+            Registrar Atividade
+
+        </button>
+
+        <button onclick="sair()">
+
+            Sair
+
+        </button>
 
     </div>
 
-    <script src="js/api.js"></script>
-    <script src="js/painel-instrutor.js"></script>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/painel-instrutor.js"></script>
 
 </body>
-
 </html>

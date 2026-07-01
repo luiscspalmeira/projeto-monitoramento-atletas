@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.faculdade.user.dto.InstrutorAtletaRequest;
+import com.faculdade.user.dto.UserResponse;
 import com.faculdade.user.entity.InstrutorAtleta;
 import com.faculdade.user.service.InstrutorAtletaService;
 
@@ -37,4 +38,11 @@ public class InstrutorAtletaController {
 
     }
 
+    @GetMapping("/instrutor/{id}/atletas")
+    public List<UserResponse> listarAtletas(
+            @PathVariable Long id) {
+
+        return service.listarAtletasDoInstrutor(id);
+
+    }
 }

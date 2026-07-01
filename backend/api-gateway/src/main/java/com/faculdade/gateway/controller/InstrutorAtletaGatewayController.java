@@ -23,9 +23,7 @@ public class InstrutorAtletaGatewayController {
 
     }
 
-    @PostMapping(
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public String vincular(
             @RequestBody String json) {
 
@@ -37,15 +35,25 @@ public class InstrutorAtletaGatewayController {
 
     }
 
-    @GetMapping(
-            value = "/instrutor/{id}",
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/instrutor/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public String listarPorInstrutor(
             @PathVariable Long id) {
 
         return gatewayService.get(
 
                 "http://localhost:8081/instrutores-atletas/instrutor/" + id);
+
+    }
+
+    @GetMapping(value = "/instrutor/{id}/atletas", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String listarAtletas(
+            @PathVariable Long id) {
+
+        return gatewayService.get(
+
+                "http://localhost:8081/instrutores-atletas/instrutor/"
+                        + id +
+                        "/atletas");
 
     }
 
