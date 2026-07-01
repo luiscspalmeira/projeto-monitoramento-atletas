@@ -1,36 +1,43 @@
-async function salvarAtividade(){
+async function salvarAtividade() {
 
-    const body = {
+  const body = {
 
-        atletaId:
-          Number(
-          document.getElementById("atletaId").value),
+    atletaId: Number(
+      localStorage.getItem("atletaId")
+    ),
 
-        modalidade:
-          document.getElementById("modalidade").value,
+    modalidade:
+      document.getElementById("modalidade").value,
 
-        distancia:
-          Number(
-          document.getElementById("distancia").value),
+    distancia: Number(
+      document.getElementById("distancia").value
+    ),
 
-        duracaoMinutos:
-          Number(
-          document.getElementById("tempo").value),
+    tempo: Number(
+      document.getElementById("tempo").value
+    ),
 
-        dataAtividade:
-          document.getElementById("data").value
-    };
+    data:
+      document.getElementById("data").value
 
-    await fetch(ACTIVITY_API,{
+  };
 
-        method:"POST",
+  try {
 
-        headers:{
-          "Content-Type":"application/json"
-        },
+    await API.post("/activities", body);
 
-        body:JSON.stringify(body)
-    });
+    alert("Atividade salva com sucesso.");
 
-    alert("Atividade salva");
+    document.getElementById("distancia").value = "";
+    document.getElementById("tempo").value = "";
+    document.getElementById("data").value = "";
+
+  } catch (erro) {
+
+    console.error(erro);
+
+    alert("Erro ao salvar atividade.");
+
+  }
+
 }

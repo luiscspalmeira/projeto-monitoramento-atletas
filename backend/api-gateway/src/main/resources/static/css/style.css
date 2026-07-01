@@ -120,3 +120,44 @@ button:hover{
     }
 
 }
+
+table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    margin-top: 20px;
+
+}
+
+th,
+td {
+
+    border: 1px solid #dcdcdc;
+
+    padding: 12px;
+
+    text-align: center;
+
+}
+
+th {
+
+    background: #2b67b8;
+
+    color: white;
+
+}
+
+tbody tr:nth-child(even) {
+
+    background: #f5f5f5;
+
+}
+
+tbody tr:hover {
+
+    background: #e8f1ff;
+
+}

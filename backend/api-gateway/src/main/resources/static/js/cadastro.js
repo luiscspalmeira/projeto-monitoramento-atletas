@@ -1,65 +1,80 @@
-async function salvarAtleta(){
+async function salvarAtleta() {
 
-    const body = {
+    const nome = document.getElementById("nome").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const senha = document.getElementById("senha").value.trim();
+    const pcd = document.getElementById("pcd").value === "true";
 
-        nome:
-          document.getElementById("nome").value,
+    if (nome === "" || email === "" || senha === "") {
 
-        email:
-          document.getElementById("email").value,
+        alert("Preencha todos os campos.");
+        return;
 
-        senha:
-          document.getElementById("senha").value,
+    }
 
-        tipoUsuario:"ATLETA",
+    try {
 
-        pcd:
-          document.getElementById("pcd").value
-          === "true"
-    };
+        await API.post("/users", {
 
-    await fetch(USER_API,{
+            nome: nome,
+            email: email,
+            senha: senha,
+            perfil: "ATLETA",
+            pcd: pcd
 
-        method:"POST",
+        });
 
-        headers:{
-            "Content-Type":"application/json"
-        },
+        alert("Atleta cadastrado com sucesso!");
 
-        body:JSON.stringify(body)
-    });
+        window.location.href = "login.html";
 
-    alert("Atleta cadastrado");
+    } catch (erro) {
+
+        alert("Erro ao cadastrar atleta.");
+
+        console.error(erro);
+
+    }
+
 }
 
-async function salvarInstrutor(){
 
-    const body = {
 
-        nome:
-          document.getElementById("nome").value,
+async function salvarInstrutor() {
 
-        email:
-          document.getElementById("email").value,
+    const nome = document.getElementById("nome").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const senha = document.getElementById("senha").value.trim();
 
-        senha:
-          document.getElementById("senha").value,
+    if (nome === "" || email === "" || senha === "") {
 
-        tipoUsuario:"INSTRUTOR",
+        alert("Preencha todos os campos.");
+        return;
 
-        pcd:false
-    };
+    }
 
-    await fetch(USER_API,{
+    try {
 
-        method:"POST",
+        await API.post("/users", {
 
-        headers:{
-            "Content-Type":"application/json"
-        },
+            nome: nome,
+            email: email,
+            senha: senha,
+            perfil: "INSTRUTOR",
+            pcd: false
 
-        body:JSON.stringify(body)
-    });
+        });
 
-    alert("Instrutor cadastrado");
+        alert("Instrutor cadastrado com sucesso!");
+
+        window.location.href = "login.html";
+
+    } catch (erro) {
+
+        alert("Erro ao cadastrar instrutor.");
+
+        console.error(erro);
+
+    }
+
 }

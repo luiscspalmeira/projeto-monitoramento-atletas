@@ -27,9 +27,16 @@ public class ActivityGatewayController {
 
     }
 
-    @PostMapping(
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping("/atleta/{id}")
+    public String buscarPorAtleta(
+            @org.springframework.web.bind.annotation.PathVariable Long id) {
+
+        return gatewayService.get(
+                "http://localhost:8082/activities/atleta/" + id);
+
+    }
+
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public String cadastrarAtividade(
             @RequestBody String json) {
 
