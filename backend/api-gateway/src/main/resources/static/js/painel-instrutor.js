@@ -63,3 +63,14 @@ function abrirHistorico(id) {
     window.location.href = "historico.html";
 
 }
+
+function sair() {
+
+    localStorage.removeItem("atletaSelecionado");
+    localStorage.removeItem("atletaId");
+    localStorage.removeItem("usuarioEmail");
+    localStorage.removeItem("usuarioTipo");
+
+    window.location.href = "login.html";
+
+}

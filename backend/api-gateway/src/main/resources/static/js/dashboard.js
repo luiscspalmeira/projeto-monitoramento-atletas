@@ -1,4 +1,6 @@
-const atletaId = localStorage.getItem("atletaId");
+const atletaId =
+    localStorage.getItem("atletaSelecionado") ||
+    localStorage.getItem("atletaId");
 
 const email = localStorage.getItem("usuarioEmail");
 

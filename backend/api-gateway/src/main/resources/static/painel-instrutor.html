@@ -5,82 +5,78 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Painel do Instrutor</title>
 
-    <link rel="stylesheet"
-          href="css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 
 </head>
 
 <body>
 
-<div class="container">
+    <div class="container">
 
-    <div class="card">
+        <div class="card">
 
-        <h2>Painel do Instrutor</h2>
+            <h2>Painel do Instrutor</h2>
 
-        <p>
+            <p>
 
-            Selecione um atleta para acompanhar suas atividades.
+                Selecione um atleta para acompanhar suas atividades.
 
-        </p>
+            </p>
 
-        <table id="tabelaAtletas">
+            <table id="tabelaAtletas">
 
-            <thead>
+                <thead>
 
-            <tr>
+                    <tr>
 
-                <th>ID</th>
+                        <th>ID</th>
 
-                <th>Nome</th>
+                        <th>Nome</th>
 
-                <th>E-mail</th>
+                        <th>E-mail</th>
 
-                <th>PcD</th>
+                        <th>PcD</th>
 
-                <th>Ações</th>
+                        <th>Ações</th>
 
-            </tr>
+                    </tr>
 
-            </thead>
+                </thead>
 
-            <tbody>
+                <tbody>
 
-            </tbody>
+                </tbody>
 
-        </table>
+            </table>
 
-        <br>
+            <br>
 
-        <button onclick="window.location='dashboard.html'">
+            <button onclick="window.location='dashboard.html'">
 
-            Dashboard
+                Dashboard
 
-        </button>
+            </button>
 
-        <button onclick="window.location='atividade.html'">
+            <button onclick="window.location='atividade.html'">
 
-            Registrar Atividade
+                Registrar Atividade
 
-        </button>
+            </button>
 
-        <button onclick="window.location='login.html'">
+            <button onclick="sair()">
+                Sair
+            </button>
 
-            Sair
-
-        </button>
+        </div>
 
     </div>
 
-</div>
-
-<script src="js/api.js"></script>
-<script src="js/painel-instrutor.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/painel-instrutor.js"></script>
 
 </body>
 
