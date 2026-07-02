@@ -5,92 +5,109 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Monitoramento de Atletas</title>
 
-    <link rel="stylesheet"
-          href="css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 
 </head>
 
 <body>
 
-<div class="container">
+    <div class="barra-acessibilidade">
 
-    <h1>Monitoramento de Atletas</h1>
+        <button onclick="diminuirFonte()" aria-label="Diminuir tamanho da fonte">
 
-    <h2>Login</h2>
+            A-
 
-    <div class="campo">
+        </button>
 
-        <label>E-mail</label>
+        <button onclick="aumentarFonte()" aria-label="Aumentar tamanho da fonte">
 
-        <input
-                type="email"
-                id="email">
+            A+
 
-    </div>
+        </button>
 
-    <div class="campo">
+        <button onclick="alternarContraste()" id="btnContraste" aria-label="Alternar alto contraste">
 
-        <label>Senha</label>
+            🌙 Alto Contraste
 
-        <input
-                type="password"
-                id="senha">
+        </button>
 
     </div>
 
-    <div class="campo">
+    <div class="container">
 
-        <label>Tipo de usuário</label>
+        <h1>Monitoramento de Atletas</h1>
 
-        <select id="tipo">
+        <h2>Login</h2>
 
-            <option value="ATLETA">
-                Atleta
-            </option>
+        <div class="campo">
 
-            <option value="PCD">
-                Atleta PcD
-            </option>
+            <label>E-mail</label>
 
-            <option value="INSTRUTOR">
-                Instrutor
-            </option>
+            <input type="email" id="email">
 
-        </select>
+        </div>
+
+        <div class="campo">
+
+            <label>Senha</label>
+
+            <input type="password" id="senha">
+
+        </div>
+
+        <div class="campo">
+
+            <label>Tipo de usuário</label>
+
+            <select id="tipo">
+
+                <option value="ATLETA">
+                    Atleta
+                </option>
+
+                <option value="PCD">
+                    Atleta PcD
+                </option>
+
+                <option value="INSTRUTOR">
+                    Instrutor
+                </option>
+
+            </select>
+
+        </div>
+
+        <button id="btnEntrar" type="button">
+
+            Entrar
+
+        </button>
+
+        <br><br>
+
+        <button onclick="window.location='cadastro-atleta.html'">
+
+            Cadastrar Atleta
+
+        </button>
+
+        <button onclick="window.location='cadastro-instrutor.html'">
+
+            Cadastrar Instrutor
+
+        </button>
+
 
     </div>
 
-    <button id="btnEntrar" type="button">
-
-        Entrar
-        
-    </button>
-
-    <br><br>
-
-    <button
-            onclick="window.location='cadastro-atleta.html'">
-
-        Cadastrar Atleta
-
-    </button>
-
-    <button
-            onclick="window.location='cadastro-instrutor.html'">
-
-        Cadastrar Instrutor
-
-    </button>
-
-</div>
-
-<script src="js/api.js"></script>
-<script src="js/login.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/acessibilidade.js"></script>
 
 </body>
+
 </html>

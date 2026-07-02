@@ -2,6 +2,8 @@ document
     .getElementById("btnEntrar")
     .addEventListener("click", entrar);
 
+
+
 async function entrar() {
 
     const email =
