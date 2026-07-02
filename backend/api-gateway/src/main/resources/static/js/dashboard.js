@@ -1,17 +1,25 @@
+
+
 const atletaId =
     localStorage.getItem("atletaSelecionado") ||
     localStorage.getItem("atletaId");
 
-const email = localStorage.getItem("usuarioEmail");
+const email =
+    localStorage.getItem("usuarioEmail");
 
 document.getElementById("usuarioLogado").innerHTML =
     "Usuário: " + (email ?? "Não informado");
+
+let graficoPizza = null;
+let graficoBarras = null;
 
 window.onload = carregarDashboard;
 
 async function carregarDashboard() {
 
     try {
+
+        await carregarIndicadores();
 
         await carregarResumoSemanal();
 
@@ -35,7 +43,14 @@ async function carregarResumoSemanal() {
         await API.get("/dashboard/semanal/" + atletaId);
 
     document.getElementById("resumoSemanal").innerHTML =
-        JSON.stringify(resumo, null, 2);
+
+        `
+        <p><strong>Total de treinos:</strong> ${resumo.quantidadeTreinos}</p>
+
+        <p><strong>Distância total:</strong> ${resumo.distanciaTotal.toFixed(1)} km</p>
+
+        <p><strong>Tempo total:</strong> ${resumo.tempoTotal} min</p>
+        `;
 
 }
 
@@ -45,7 +60,14 @@ async function carregarResumoMensal() {
         await API.get("/dashboard/mensal/" + atletaId);
 
     document.getElementById("resumoMensal").innerHTML =
-        JSON.stringify(resumo, null, 2);
+
+        `
+        <p><strong>Total de treinos:</strong> ${resumo.quantidadeTreinos}</p>
+
+        <p><strong>Distância total:</strong> ${resumo.distanciaTotal.toFixed(1)} km</p>
+
+        <p><strong>Tempo total:</strong> ${resumo.tempoTotal} min</p>
+        `;
 
 }
 
@@ -60,49 +82,192 @@ async function carregarModalidades() {
 
 }
 
+async function carregarIndicadores() {
+
+    const atividades =
+        await API.get("/activities/atleta/" + atletaId);
+
+    const totalTreinos = atividades.length;
+
+    const distanciaTotal =
+        atividades.reduce(
+            (soma, atividade) => soma + atividade.distancia,
+            0
+        );
+
+    const tempoTotal =
+        atividades.reduce(
+            (soma, atividade) => soma + atividade.tempo,
+            0
+        );
+
+    const media =
+        totalTreinos > 0
+            ? distanciaTotal / totalTreinos
+            : 0;
+
+    document.getElementById("totalTreinos").innerHTML =
+        totalTreinos;
+
+    document.getElementById("distanciaTotal").innerHTML =
+        distanciaTotal.toFixed(1) + " km";
+
+    document.getElementById("tempoTotal").innerHTML =
+        tempoTotal + " min";
+
+    document.getElementById("mediaTreino").innerHTML =
+        media.toFixed(1) + " km";
+}
+
 function criarGraficoPizza(dados) {
 
-    new Chart(document.getElementById("graficoPizza"), {
+    if (graficoPizza != null) {
 
-        type: "pie",
+        graficoPizza.destroy();
 
-        data: {
+    }
 
-            labels: Object.keys(dados),
+    graficoPizza = new Chart(
 
-            datasets: [{
+        document.getElementById("graficoPizza"),
 
-                data: Object.values(dados)
+        {
 
-            }]
+            type: "pie",
+
+            data: {
+
+                labels:
+
+                    dados.map(item => item.modalidade),
+
+                datasets: [
+
+                    {
+
+                        label: "Modalidades",
+
+                        data:
+
+                            dados.map(item => item.quantidade),
+
+                        backgroundColor: [
+
+                            "#42A5F5",
+                            "#66BB6A",
+                            "#FFA726"
+
+                        ]
+
+                    }
+
+                ]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                plugins: {
+
+                    legend: {
+
+                        position: "bottom"
+
+                    }
+
+                }
+
+            }
 
         }
 
-    });
+    );
 
 }
 
 function criarGraficoBarras(dados) {
 
-    new Chart(document.getElementById("graficoBarras"), {
+    if (graficoBarras != null) {
 
-        type: "bar",
+        graficoBarras.destroy();
 
-        data: {
+    }
 
-            labels: Object.keys(dados),
+    graficoBarras = new Chart(
 
-            datasets: [{
+        document.getElementById("graficoBarras"),
 
-                label: "Quantidade",
+        {
 
-                data: Object.values(dados)
+            type: "bar",
 
-            }]
+            data: {
+
+                labels:
+
+                    dados.map(item => item.modalidade),
+
+                datasets: [
+
+                    {
+
+                        label: "Quantidade de atividades",
+
+                        data:
+
+                            dados.map(item => item.quantidade),
+
+                        backgroundColor: [
+
+                            "#42A5F5",
+                            "#66BB6A",
+                            "#FFA726"
+
+                        ]
+
+                    }
+
+                ]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                plugins: {
+
+                    legend: {
+
+                        display: false
+
+                    }
+
+                },
+
+                scales: {
+
+                    y: {
+
+                        beginAtZero: true,
+
+                        ticks: {
+
+                            precision: 0
+
+                        }
+
+                    }
+
+                }
+
+            }
 
         }
 
-    });
+    );
 
 }
 

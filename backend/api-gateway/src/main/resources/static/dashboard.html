@@ -5,13 +5,11 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Dashboard</title>
+    <title>Dashboard do Atleta</title>
 
-    <link rel="stylesheet"
-          href="css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -19,80 +17,179 @@
 
 <body>
 
-<div class="container">
+    <div class="container-dashboard">
 
-    <h1>Dashboard do Atleta</h1>
+        <header>
 
-    <h3 id="usuarioLogado"></h3>
+            <h1>Dashboard do Atleta</h1>
 
-    <hr>
+            <h3 id="usuarioLogado"></h3>
 
-    <div class="cards">
+        </header>
 
-        <div class="card">
+        <hr>
 
-            <h2>Resumo Semanal</h2>
+        <!-- ==========================
+         INDICADORES
+    =========================== -->
 
-            <p id="resumoSemanal">
-                Carregando...
-            </p>
+        <div class="cards indicadores">
+
+            <div class="card">
+                <h3>Total de treinos</h3>
+                <p id="totalTreinos">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Distância</h3>
+                <p id="distanciaTotal">0 km</p>
+            </div>
+
+            <div class="card">
+                <h3>Tempo</h3>
+                <p id="tempoTotal">0 min</p>
+            </div>
+
+            <div class="card">
+                <h3>Média por treino</h3>
+                <p id="mediaTreino">0 km</p>
+            </div>
 
         </div>
 
+        <br>
+
+        <!-- ==========================
+         RESUMOS
+    =========================== -->
+
+        <div class="cards">
+
+            <div class="card">
+
+                <h2>Resumo Semanal</h2>
+
+                <div id="resumoSemanal">
+
+                    Carregando...
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <h2>Resumo Mensal</h2>
+
+                <div id="resumoMensal">
+
+                    Carregando...
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <br>
+
+        <!-- ==========================
+         GRÁFICO DE BARRAS
+    =========================== -->
+
         <div class="card">
 
-            <h2>Resumo Mensal</h2>
+            <h2>
 
-            <p id="resumoMensal">
-                Carregando...
-            </p>
+                Atividades realizadas nas últimas quatro semanas
+
+            </h2>
+
+            <canvas id="graficoSemanas"></canvas>
+
+        </div>
+
+        <br>
+
+        <!-- ==========================
+         PIZZA + HISTÓRICO
+    =========================== -->
+
+        <div class="cards">
+
+            <div class="card">
+
+                <h2>Modalidades Praticadas</h2>
+
+                <canvas id="graficoPizza"></canvas>
+
+            </div>
+
+            <div class="card">
+
+                <h2>Últimos Treinos</h2>
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Data</th>
+
+                            <th>Modalidade</th>
+
+                            <th>Km</th>
+
+                            <th>Tempo</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="tabelaHistorico">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+        <br>
+
+        <!-- ==========================
+         BOTÕES
+    =========================== -->
+
+        <div class="botoes-dashboard">
+
+            <button onclick="window.location='atividade.html'">
+
+                Nova Atividade
+
+            </button>
+
+            <button onclick="window.location='historico.html'">
+
+                Histórico Completo
+
+            </button>
+
+            <button onclick="logout()">
+
+                Sair
+
+            </button>
 
         </div>
 
     </div>
 
-    <hr>
+    <script src="js/api.js"></script>
 
-    <div class="cards">
-
-        <div class="card">
-
-            <h2>Modalidades</h2>
-
-            <canvas id="graficoPizza"></canvas>
-
-        </div>
-
-        <div class="card">
-
-            <h2>Distância</h2>
-
-            <canvas id="graficoBarras"></canvas>
-
-        </div>
-
-    </div>
-
-    <br>
-
-    <button
-            onclick="window.location='atividade.html'">
-
-        Nova Atividade
-
-    </button>
-
-    <button
-            onclick="logout()">
-
-        Sair
-
-    </button>
-
-</div>
-
-<script src="js/api.js"></script>
-<script src="js/dashboard.js"></script>
+    <script src="js/dashboard.js"></script>
 
 </body>
 
